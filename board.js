@@ -12,6 +12,14 @@
     this.addApple();
   };
   
+  Board.prototype.addApple = function () {
+    var x = this.random(this.width - 10, 0);
+    var y = this.random(this.height - 10, 0);
+    var newApple = new S.Coord(x, y, this.ctx, this.appleColor);
+    
+    this.apples.push(newApple);
+  };
+  
   Board.prototype.draw = function () {
     this.ctx.clearRect(0, 0, this.width, this.height);
     
@@ -20,7 +28,8 @@
     this.ifHitAppleRemoveAndGrowSnakeAndAddNewApple();
     
     if (this.snake.hasHitBoard(this.width, this.height)) {
-      console.log("board");
+      this.snake.alive = false;
+      console.log("Board");
     }
       
     if (this.snake.hasHitSelf()) {
@@ -29,6 +38,21 @@
     
     this.drawApples();
     this.snake.draw();
+  };
+  
+  Board.prototype.drawApples = function () {
+    for (var i = 0; i < this.apples.length; i++) {
+      this.apples[i].draw();
+    }
+  };
+  
+  Board.prototype.gameOverDraw = function () {
+      this.ctx.fillStyle = "#eee";
+      this.ctx.fillRect(0, 0, this.width, this.height);
+      
+      this.ctx.fillStyle = "black";
+      this.ctx.font = "20px sans-serif";
+      this.ctx.fillText("Game Over", 140, 150);
   };
   
   Board.prototype.ifHitAppleRemoveAndGrowSnakeAndAddNewApple = function () {
@@ -48,19 +72,5 @@
   
   Board.prototype.random = function (max, min) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
-  
-  Board.prototype.drawApples = function () {
-    for (var i = 0; i < this.apples.length; i++) {
-      this.apples[i].draw();
-    }
-  };
-  
-  Board.prototype.addApple = function () {
-    var x = this.random(this.width - 10, 0);
-    var y = this.random(this.height - 10, 0);
-    var newApple = new S.Coord(x, y, this.ctx, this.appleColor);
-    
-    this.apples.push(newApple);
   };
 })(this);

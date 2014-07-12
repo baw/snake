@@ -2,6 +2,7 @@
   var S = root.S = ( root.S || {} );
   var Snake = S.Snake = function (startX, startY, ctx) {
     this.COLOR = "#00F";
+    this.alive = true;
     
     this.direction = "U";
     this.segments = [new S.Coord(startX, startY, ctx, this.COLOR)];
@@ -9,10 +10,10 @@
   };
   
   var DIFFS = {
-    "U" : [0, -5],
-    "R" : [5,  0],
-    "D" : [0,  5],
-    "L" : [-5, 0]
+    "U" : [0, -10],
+    "R" : [10,  0],
+    "D" : [0,  10],
+    "L" : [-10, 0]
   };
   
   var directionInverse = {
@@ -50,8 +51,8 @@
   Snake.prototype.hasHitBoard = function (width, height) {
     var face = this.face();
     
-    return this.face.x > width  || this.face.x < 0 ||
-           this.face.y > height || this.face.y < 0;
+    return face.x > width  || face.x < 0 ||
+           face.y > height || face.y < 0;
   };
   
   Snake.prototype.hasHitSelf = function () {

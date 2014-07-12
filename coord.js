@@ -8,6 +8,7 @@
   };
   
   Coord.prototype.draw = function () {
+    this.ctx.strokeStyle = "#FFF";
     this.ctx.fillStyle = this.color;
     this.ctx.fillRect(this.x, this.y, 10, 10);
   };
