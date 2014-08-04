@@ -7,6 +7,7 @@ the game and keyboard keys as the inputs.
 * HTML5 Canvas
 * Keyboard input
 * Fun times
+* Improve "Game Over" dedication
 
 ## Todo
 * Add scoring
